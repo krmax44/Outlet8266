@@ -3,7 +3,8 @@
 Transmits RF signals received via HTTP. Created for the ESP8266.
 
   - Tutorial: [DIY Smart WiFi Outlets with Outlet8266, Controllable With Google Assistant, IFTTT, Tasker and More](https://krmax44.de/blog/cheap-diy-wifi-outlets/)
-  - Web App: [outlet8266.krmax44.de](http://outlet8266.krmax44.de)
+  - [Web App](http://outlet8266.krmax44.de)
+  - [Demo Video](https://www.youtube.com/watch?v=Z4l9FZTBnmk)
   
 ## API
 
