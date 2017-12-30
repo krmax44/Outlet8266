@@ -1,0 +1,18 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg">
+<metadata>Copyright (C) 2017 by original authors @ fontello.com</metadata>
+<defs>
+<font id="fontello" horiz-adv-x="1000" >
+<font-face font-family="fontello" font-weight="400" font-stretch="normal" units-per-em="1000" ascent="850" descent="-150" />
+<missing-glyph horiz-adv-x="1000" />
+<glyph glyph-name="clock" unicode="&#xe800;" d="M500 17a333 333 0 0 1 333 333 333 333 0 0 1-333 333 333 333 0 0 1-333-333 333 333 0 0 1 333-333m0 750a417 417 0 0 0 417-417 417 417 0 0 0-417-417c-230 0-417 188-417 417a417 417 0 0 0 417 417m21-209v-218l187-112-31-51-219 131v250h63z" horiz-adv-x="1000" />
+
+<glyph glyph-name="delete" unicode="&#xe801;" d="M792 683h-146l-42 42h-208l-42-42h-146v-83h584m-542-542a83 83 0 0 1 83-83h334a83 83 0 0 1 83 83v500h-500v-500z" horiz-adv-x="1000" />
+
+<glyph glyph-name="plus" unicode="&#xe802;" d="M792 308h-250v-250h-84v250h-250v84h250v250h84v-250h250v-84z" horiz-adv-x="1000" />
+
+<glyph glyph-name="power" unicode="&#xe803;" d="M690 623l-60-60c72-44 120-123 120-213a250 250 0 0 0-250-250 250 250 0 0 0-250 250c0 90 48 169 120 213l-60 60c-87-60-143-160-143-273a333 333 0 0 1 333-333 333 333 0 0 1 333 333c0 113-56 213-143 273m-148 102h-84v-417h84" horiz-adv-x="1000" />
+</font>
+</defs>
+</svg>

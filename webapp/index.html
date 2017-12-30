@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Outlet8266</title>
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+		<style>
+			.max-height {
+				padding-top: 10px;
+			}
+
+			@media (min-width: 1200px) {
+				.container {
+					max-width: 50%;
+				}
+
+				.max-height {
+					min-height: 100vh;
+					padding-top: 0;
+				}
+			}
+
+			.w-overlay {
+				z-index: 9999;
+				position: fixed;
+				left: 0;
+				right: 0;
+				top: 0;
+				bottom: 0;
+				background-color: #fff;
+			}
+
+			@font-face {
+			  font-family: 'fontello';
+			  src: url('fonts/fontello.eot?39075032');
+			  src: url('fonts/fontello.eot?39075032#iefix') format('embedded-opentype'),
+			       url('fonts/fontello.woff2?39075032') format('woff2'),
+			       url('fonts/fontello.woff?39075032') format('woff'),
+			       url('fonts/fontello.ttf?39075032') format('truetype'),
+			       url('fonts/fontello.svg?39075032#fontello') format('svg');
+			  font-weight: normal;
+			  font-style: normal;
+			}
+
+			[class^="icon-"]:before, [class*=" icon-"]:before {
+			  font-family: "fontello";
+			  font-style: normal;
+			  font-weight: normal;
+			  speak: none;
+			 
+			  display: inline-block;
+			  text-decoration: inherit;
+			  width: 1em;
+			  margin-right: .2em;
+			  text-align: center;
+			  /* opacity: .8; */
+			 
+			  /* For safety - reset parent styles, that can break glyph codes*/
+			  font-variant: normal;
+			  text-transform: none;
+			 
+			  /* fix buttons height, for twitter bootstrap */
+			  line-height: 1em;
+			 
+			  /* Animation center compensation - margins should be symmetric */
+			  /* remove if not needed */
+			  margin-left: .2em;
+			 
+			  /* you can be more comfortable with increased icons size */
+			  /* font-size: 120%; */
+			 
+			  /* Font smoothing. That was taken from TWBS */
+			  -webkit-font-smoothing: antialiased;
+			  -moz-osx-font-smoothing: grayscale;
+			 
+			  /* Uncomment for 3D effect */
+			  /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+			}
+
+			.icon-clock:before { content: '\e800'; } /* '' */
+			.icon-delete:before { content: '\e801'; } /* '' */
+			.icon-plus:before { content: '\e802'; } /* '' */
+			.icon-power:before { content: '\e803'; } /* '' */
+		</style>
+	</head>
+	<body>
+		<div class="d-md-flex flex-column justify-content-center max-height">
+			<div class="container app-view" style="display: none" id="login">
+				<div class="jumbotron">
+					<h1>Outlet8266</h1>
+					<p>Please login to Outlet8266.</p>
+				</div>
+				<div class="row no-gutters">
+					<div class="col-md-6">
+						<input type="text" class="form-control" placeholder="IP/Hostname of host" id="ipaddress" autocomplete="off">
+					</div>
+					<div class="col-md-6">
+						<input type="password" class="form-control" placeholder="Your password" id="pass" autocomplete="off">
+					</div>
+				</div>
+				<a href="#!" onclick="app.login()" class="btn btn-primary btn-block">Login</a>
+			</div>
+
+			<div class="container app-view" style="display: none" id="control">
+				<div class="jumbotron">
+					<h1 style="display: inline;">Outlet8266</h1>
+					<a href="#!" onclick="$('#add-outlet').modal('show')" class="btn btn-primary float-md-right"><i class="icon-plus"></i> Add outlet</a>
+				</div>
+
+				<ul class="list-group" id="outlets">
+				</ul>
+				
+				<div class="text-center">
+					<br>
+					<p>
+						<a href="#!" class="share-config" onclick="app.share()">Share your outlets</a>
+					 	| 
+					 	<a href="#!" class="autovoice-config" onclick="app.autovoice()">Copy AutoVoice config</a>
+					 	| 
+						<a href="#!" class="logout" onclick="app.logout()">Log out</a>
+					</p>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="add-outlet" tabindex="-1">
+		    <div class="modal-dialog" role="document">
+		        <div class="modal-content">
+		            <div class="modal-header">
+		                <h5 class="modal-title">Add outlet</h5>
+		                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		                    <span aria-hidden="true">&times;</span>
+		                </button>
+		            </div>
+		            <div class="modal-body">
+		                <form id="add-outlet-form">
+		                	<input type="text" class="form-control" placeholder="Name" id="add-outlet-name" autocomplete="off">
+		                	<select class="form-control" id="add-outlet-type">
+		                		<option value="decimal">Decimal</option>
+		                		<option value="binary">Binary</option>
+		                		<option value="tristate">Tristate</option>
+		                	</select>
+							<input type="text" class="form-control" placeholder="RF code ON" id="add-outlet-binary-on" autocomplete="off">
+							<input type="text" class="form-control" placeholder="RF code OFF" id="add-outlet-binary-off" autocomplete="off">
+							<input type="text" class="form-control" placeholder="Pulselength (optional)" id="add-outlet-pulselength" autocomplete="off">
+							<input type="text" class="form-control" placeholder="Protocol (optional)" id="add-outlet-protocol" autocomplete="off">
+		                </form>
+		            </div>
+		            <div class="modal-footer">
+		                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="$('#add-outlet-form')[0].reset();">Cancel</button>
+		                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="app.addOutlet(); $('#add-outlet-form')[0].reset();"><i class="icon-plus"></i> Add</button>
+		            </div>
+		        </div>
+		    </div>
+		</div>
+
+		<div class="modal fade" id="error" tabindex="-1">
+		    <div class="modal-dialog" role="document">
+		        <div class="modal-content">
+		            <div class="modal-header">
+		                <h5 class="modal-title">Error</h5>
+		                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		                    <span aria-hidden="true">&times;</span>
+		                </button>
+		            </div>
+		            <div class="modal-body">
+		                Could not send the request.
+		            </div>
+		            <div class="modal-footer">
+		                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="app.logout()">Logout</button>
+		            </div>
+		        </div>
+		    </div>
+		</div>
+
+		<div class="w-overlay"></div>
+
+		<script src="js/jquery.min.js"></script>
+		<script src="js/popper.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/app.js"></script>
+	</body>
+</html>
